@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur mon Portfolio</h1>
+    </header>
+    <main>
+        <section>
+            <h2>À propos de moi</h2>
+            <p>Voici une brève présentation de mon parcours et de mes compétences.</p>
+            <img src="assets/img/profil.jpg" alt="Photo de profil">
+        </section>
+        <section>
+            <h2>Réseaux sociaux</h2>
+            <ul>
+                <li><a href="https://www.linkedin.com/">LinkedIn</a></li>
+                <li><a href="https://github.com/">GitHub</a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
 
