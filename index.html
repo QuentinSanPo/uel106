@@ -8,7 +8,77 @@
     <meta name="keywords" content="portfolio, mini-site">
     <title>Portfolio - Présentation</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <style>
+        /* Style de base pour le portfolio */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+
+        header, nav, footer {
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 15px;
+        }
+
+        header h1, header p {
+            margin: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        #presentation {
+            margin-bottom: 40px;
+        }
+
+        #presentation img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        #weather-widget {
+            background: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        #weather-widget h3 {
+            margin-top: 0;
+        }
+
+        .error {
+            color: red;
+        }
+
+        footer {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -44,47 +114,53 @@
     <footer>
         <p>© 2024 Quentin Sanchez-Porro.</p>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const weatherLocation = document.getElementById("weather-location");
+            const weatherInfo = document.getElementById("weather-info");
+            const apiKey = "29ec2bd80b377bc1513954931ca2d498";
+
+            function fetchWeather(latitude, longitude) {
+                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&lang=fr&appid=${apiKey}`;
+
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Erreur API : ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const location = data.name;
+                        const temp = data.main.temp;
+                        const description = data.weather[0].description;
+                        weatherLocation.textContent = `Lieu : ${location}`;
+                        weatherInfo.textContent = `Température : ${temp}°C, ${description}`;
+                    })
+                    .catch(error => {
+                        weatherLocation.textContent = "Erreur lors du chargement de la position.";
+                        weatherInfo.textContent = "Impossible de récupérer les données météo.";
+                        console.error("Erreur API :", error);
+                    });
+            }
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const { latitude, longitude } = position.coords;
+                        fetchWeather(latitude, longitude);
+                    },
+                    error => {
+                        weatherLocation.textContent = "Géolocalisation refusée.";
+                        weatherInfo.textContent = "Impossible d'afficher la météo sans votre position.";
+                    }
+                );
+            } else {
+                weatherLocation.textContent = "Géolocalisation non supportée par votre navigateur.";
+                weatherInfo.textContent = "Veuillez utiliser un navigateur compatible.";
+            }
+        });
+    </script>
 </body>
 </html>
-
-document.addEventListener("DOMContentLoaded", () => {
-    const weatherWidget = document.getElementById("weather-widget");
-    const weatherLocation = document.getElementById("weather-location");
-    const weatherInfo = document.getElementById("weather-info");
-
-    function fetchWeather(latitude, longitude) {
-        const apiKey = "29ec2bd80b377bc1513954931ca2d498";
-        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&lang=fr&appid=${apiKey}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const location = data.name;
-                const temp = data.main.temp;
-                const description = data.weather[0].description;
-                weatherLocation.textContent = `Lieu : ${location}`;
-                weatherInfo.textContent = `Température : ${temp}°C, ${description}`;
-            })
-            .catch(error => {
-                weatherLocation.textContent = "Erreur lors du chargement de la position.";
-                weatherInfo.textContent = "Impossible de récupérer les données météo.";
-                console.error("Erreur API Météo :", error);
-            });
-    }
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                const { latitude, longitude } = position.coords;
-                fetchWeather(latitude, longitude);
-            },
-            error => {
-                weatherLocation.textContent = "Géolocalisation refusée.";
-                weatherInfo.textContent = "Impossible d'afficher la météo sans votre position.";
-            }
-        );
-    } else {
-        weatherLocation.textContent = "Géolocalisation non supportée par votre navigateur.";
-        weatherInfo.textContent = "Veuillez utiliser un navigateur compatible.";
-    }
-});
