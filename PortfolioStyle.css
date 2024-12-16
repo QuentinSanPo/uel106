@@ -1,68 +1,84 @@
-       body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f9f9f9;
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+}
 
-        header, nav, footer {
-            text-align: center;
-            background: #333;
-            color: white;
-            padding: 15px;
-        }
+header, nav, footer {
+    text-align: center;
+    background: #333;
+    color: white;
+    padding: 15px;
+}
 
-        header h1, header p {
-            margin: 10px 0;
-        }
+header h1, header p {
+    margin: 10px 0;
+}
 
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
+nav ul {
+    list-style: none;
+    padding: 0;
+}
 
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
 
-        main {
-            padding: 20px;
-        }
+main {
+    padding: 20px;
+}
 
-        #presentation {
-            margin-bottom: 40px;
-        }
+#presentation {
+    margin-bottom: 40px;
+    text-align: center;
+}
 
-        #presentation img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-        }
+#presentation img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+}
 
-        #weather-widget {
-            background: #fff;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            text-align: center;
-        }
+#weather-widget {
+    background: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+}
 
-        #weather-widget h3 {
-            margin-top: 0;
-        }
+#weather-widget h3 {
+    margin-top: 0;
+}
 
-        .error {
-            color: red;
-        }
+.error {
+    color: red;
+}
 
-        footer {
-            margin-top: 20px;
-        }
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+footer a {
+    color: #777;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #333;
+}
