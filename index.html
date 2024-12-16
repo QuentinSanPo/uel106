@@ -146,19 +146,22 @@
             }
 
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    position => {
-                        const { latitude, longitude } = position.coords;
-                        fetchWeather(latitude, longitude);
-                    },
-                    error => {
-                        weatherLocation.textContent = "Géolocalisation refusée.";
-                        weatherInfo.textContent = "Impossible d'afficher la météo sans votre position.";
-                    }
-                );
-            } else {
-                weatherLocation.textContent = "Géolocalisation non supportée par votre navigateur.";
-                weatherInfo.textContent = "Veuillez utiliser un navigateur compatible.";
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            const { latitude, longitude } = position.coords;
+            fetchWeather(latitude, longitude);
+        },
+        error => {
+            console.warn("Géolocalisation refusée. Chargement des données par défaut.");
+            fetchWeather(48.8566, 2.3522); // Paris, France
+        }
+    );
+} else {
+    weatherLocation.textContent = "Géolocalisation non supportée par votre navigateur.";
+    weatherInfo.textContent = "Chargement des données par défaut.";
+    fetchWeather(48.8566, 2.3522); // Paris, France
+}
+
             }
         });
     </script>
