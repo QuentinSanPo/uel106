@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const weatherInfo = document.getElementById("weather-info");
 
     function fetchWeather(latitude, longitude) {
-        const apiKey = "your_openweather_api_key"; // Remplacez par votre clé API OpenWeather
+        const apiKey = "29ec2bd80b377bc1513954931ca2d498";
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&lang=fr&appid=${apiKey}`;
 
         fetch(url)
